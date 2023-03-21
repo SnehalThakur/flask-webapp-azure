@@ -68,7 +68,10 @@ def retrieveUsersWithUsername(username):
 def executeQuery(query: str):
     con = sql.connect("utils/userData.db")
     cur = con.cursor()
-    cur.execute(query)
+    try:
+        cur.execute(query)
+    except:
+        print("Invalid Query. Kindly Check.")
     users = cur.fetchall()
     con.close()
     return users
