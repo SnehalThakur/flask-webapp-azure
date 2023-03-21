@@ -3,7 +3,7 @@ import re
 
 
 def createTableIfNotExist():
-    sqlConnection = sql.connect(r"SQLiteDb\userData.db")
+    sqlConnection = sql.connect(r"utils/userData.db")
     print(sqlConnection)
 
     sqlConnection.execute("""
@@ -19,7 +19,7 @@ def createTableIfNotExist():
 # print(cursor.fetchall())
 
 def insertUser(username, password):
-    con = sql.connect("SQLiteDb\\userData.db")
+    con = sql.connect("utils/userData.db")
     cur = con.cursor()
     cur.execute("INSERT INTO users (username,password) VALUES (?,?)", (username, password))
     con.commit()
@@ -27,7 +27,7 @@ def insertUser(username, password):
 
 
 def retrieveUsers():
-    con = sql.connect("SQLiteDb\\userData.db")
+    con = sql.connect(r"utils/userData.db")
     cur = con.cursor()
     cur.execute("SELECT username, password FROM users")
     users = cur.fetchall()
@@ -36,7 +36,7 @@ def retrieveUsers():
 
 
 def registerUsers(username, email, password):
-    con = sql.connect("SQLiteDb\\userData.db")
+    con = sql.connect(r"utils/userData.db")
     cursor = con.cursor()
     cursor.execute('SELECT * FROM accounts WHERE username = % s', (username,))
     account = cursor.fetchone()
@@ -57,7 +57,7 @@ def registerUsers(username, email, password):
 
 
 def retrieveUsersWithUsername(username):
-    con = sql.connect("SQLiteDb\\userData.db")
+    con = sql.connect("utils/userData.db")
     cur = con.cursor()
     cur.execute("SELECT * FROM users WHERE username = % s', (username)")
     users = cur.fetchall()
@@ -66,7 +66,7 @@ def retrieveUsersWithUsername(username):
 
 
 def executeQuery(query: str):
-    con = sql.connect("SQLiteDb\\userData.db")
+    con = sql.connect("utils/userData.db")
     cur = con.cursor()
     cur.execute(query)
     users = cur.fetchall()

@@ -22,6 +22,8 @@ def init():
 
     tfidf_vectorizer = TfidfVectorizer()
     X_tfidf = tfidf_vectorizer.fit_transform(X.values.astype('U')).toarray()
+
+    joblib.dump(tfidf_vectorizer, 'models/tfidf_vectorizer.pkl')
     # X_train_tfidf, X_test_tfidf, y_train_tfidf, y_test_tfidf = train_test_split(X_tfidf, y, test_size=0.2)
     # print("X_train_tfidf.shape=", X_train_tfidf.shape)
     # print("y_train_tfidf.shape=", y_train_tfidf.shape)
@@ -49,9 +51,13 @@ def init():
 # def modelTraining():
 
 
+
 def getPrediction(text):
 
-    tfidf_vectorizer = init()
+    # tfidf_vectorizer = init()
+
+    tfidf_vectorizer = joblib.load('models/tfidf_vectorizer.pkl')
+
     v0 = tfidf_vectorizer.transform([text]).toarray()
     # print(v0)
 
